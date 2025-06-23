@@ -1,10 +1,47 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import axios from 'axios'
+import {Link} from "react-router-dom";
 
 const ListaUsuario = () => {
+  const [lista, setLista] = useState([])
+      useEffect(()=>{
+      const getUsuarios = async()=>{  
+          const res = await axios.get('http://localhost:4000/api/usuarios')
+          setLista(res.data)
+      }
+      getUsuarios()
+    },[lista])
+  
+    const eliminarUsuario = async(id)=>{
+        await axios.delete(`http://localhost:4000/api/usuarios/${id}`)
+        alert('Usuario Eliminado exitosamente')
+    }
+
   return (
-    <div>
-      <h1>Navegacion</h1>
+    <div className="row">
+      {lista.map((list) => (
+        <div className="col-md-4 p-2" key={list._id}>    {/* contenedor golbal de cada card el Key es para traer ese documento y que no se repita */}
+          <div className="card">          {/*Componente padre*/}
+            <div className="card-header"> {/*Componente hijo*/}</div>
+                  <h5>Nombre: {list.nombre} </h5>
+            </div>
+            <div className="card-body">
+              <p>Apellido: {list.apellido} </p>
+              <p>Edad: {list.edad} </p>
+              <p>Telefono: {list.telefono} </p>
+              <p>Correo: {list.correo} </p>
+            </div>
+              <div className="card-footer">
+                <button className="btn btn-danger" onClick={()=>eliminarUsuario(list._id)}>
+                  Eliminar
+                </button>
+                <Link className="btn btn-primary m-1" to = {"/edit/"+list._id}>
+                  Editar
+                </Link>
+              </div>
+        </div>
+      ))}
     </div>
-  )
+  );
 }
 export default ListaUsuario
