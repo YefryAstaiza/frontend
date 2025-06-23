@@ -1,15 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// Componente funcional para la barra de navegación
 const Navegacion = () => {
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <header>
+      {/* Barra de navegación responsiva con sombra sutil y espaciado */}
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
         <div className="container">
-          {/* Cambié <link> por <Link> para el logo/brand */}
-          <Link className="navbar-brand" to="/">
-            usuarios
+          {/* Enlace que actúa como logo o nombre de la app */}
+          <Link className="navbar-brand fw-bold text-uppercase" to="/">
+            UsuariosApp
           </Link>
+
+          {/* Botón que aparece en pantallas pequeñas para mostrar menú */}
           <button
             className="navbar-toggler"
             type="button"
@@ -21,23 +25,28 @@ const Navegacion = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
+
+          {/* Menú colapsable para los enlaces de navegación */}
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  LISTA USUARIOS
+            <ul className="navbar-nav ms-auto text-center">
+              {/* Enlace a la lista de usuarios */}
+              <li className="nav-item px-2">
+                <Link className="nav-link active" to="/">
+                  Lista de Usuarios
                 </Link>
               </li>
-              <li className="nav-item">
+
+              {/* Enlace a crear usuario */}
+              <li className="nav-item px-2">
                 <Link className="nav-link" to="/CrearUsuario">
-                  CREAR USUARIOS
+                  Crear Usuario
                 </Link>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-    </div>
+    </header>
   );
 };
 
